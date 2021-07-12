@@ -9,6 +9,11 @@ class App extends React.Component {
       videos: [],
       selectedVideo: null
     };
+
+    componentDidMount() {
+      this.onTermSubmit('Food')
+    }
+    
     onTermSubmit = async term => {
       const response = await youtube.get('./search', {
         params: {
@@ -16,7 +21,10 @@ class App extends React.Component {
         }
       });
 
-      this.setState({ videos: response.data.items})
+      this.setState({ 
+        videos: response.data.items,
+        selectedVideo: response.data.items[0]
+      })
     }
 
     onVideoSelect = (video) => {
